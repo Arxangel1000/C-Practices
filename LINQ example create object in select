@@ -1,0 +1,60 @@
+using System;
+using System.Linq;
+
+
+class ContactInfo
+{ 
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public string Phone { get; set; }
+
+    public ContactInfo(string name, string email, string phone)
+    {
+        Name = name;
+        Email = email;
+        Phone = phone;
+    }
+}
+
+class EmailAddress
+{
+    public string Name { get; set; }
+    public string Address { get; set; }
+    public EmailAddress(string name, string address)
+    {
+        Name = name;
+        Address = address;
+    }
+}
+
+class SelectDemo3
+{
+    static void Main(string[] args)
+    {
+        ContactInfo[] contactInfos =
+        {
+            new ContactInfo("Герберт", "Herb@HerbSchildt.com", "555-1010"),
+            new ContactInfo("Tom", "Tom@HerbSchildt.com", "555-1101"),
+            new ContactInfo("Capa", "Sara@HerbSchildt.com", "555-0110")
+        };
+
+        var emails = from contact in contactInfos
+                    select new EmailAddress(contact.Name, contact.Email);
+
+        foreach (var email in emails)
+        {
+            Console.WriteLine("{0}: {1}", email.Name, email.Address);
+        }
+
+        var emails2 = from mailInfo in emails
+                      select new EmailAddress(mailInfo.Address, mailInfo.Name);
+
+
+        foreach (var email2 in emails2)
+        {
+            Console.WriteLine("{0}: {1}", email2.Name, email2.Address);
+        }
+    }
+}
+
+
