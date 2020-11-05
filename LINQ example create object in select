@@ -45,15 +45,6 @@ class SelectDemo3
         {
             Console.WriteLine("{0}: {1}", email.Name, email.Address);
         }
-
-        var emails2 = from mailInfo in emails
-                      select new EmailAddress(mailInfo.Address, mailInfo.Name);
-
-
-        foreach (var email2 in emails2)
-        {
-            Console.WriteLine("{0}: {1}", email2.Name, email2.Address);
-        }
     }
 }
 
