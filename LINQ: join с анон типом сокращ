@@ -1,0 +1,61 @@
+// Продемонстрировать применение оператора join.
+using System;
+using System.Linq;
+
+// Класс, связывающий наименование товара с его порядковым номером.
+
+class Product
+{ 
+    public string Name { get; set; }
+    public int Id { get; set; }
+
+    public Product(string name, int id)
+    {
+        Name = name;
+        Id = id;
+    }
+}
+
+class InStock
+{
+    public int Id { get; set; }
+    public bool HaveInStock { get; set; }
+
+    public InStock(int id, bool haveInStock)
+    {
+        Id = id;
+        HaveInStock = haveInStock;
+    }
+}
+
+class JoinDemo
+{
+    static void Main(string[] args)
+    {
+        Product[] products =
+        {
+            new Product("Масло", 12),
+            new Product("Хлебушек", 14),
+            new Product("Зерно", 20),
+            new Product("Семечки", 26)
+        };
+
+        InStock[] inStock =
+        {
+            new InStock(12, true),
+            new InStock(14, true), 
+            new InStock(20, false),
+            new InStock(26, true)
+        };
+
+        var sorts = from product in products
+                   join inStk in inStock
+                   on product.Id equals inStk.Id
+                   select new { product.Name, inStk.HaveInStock };
+
+        foreach (var sort in sorts)
+        {
+            Console.WriteLine("{0} {1}", sort.Name, sort.HaveInStok);
+        }
+    }
+}
