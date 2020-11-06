@@ -1,0 +1,66 @@
+using System;
+using System.Linq;
+
+class Product
+{ 
+    public string Name { get; set; }
+    public int Id { get; set; }
+
+    public Product(string name, int id)
+    {
+        Name = name;
+        Id = id;
+    }
+}
+
+class HaveInStock
+{
+    public int Id { get; set; }
+    public bool HaveIn { get; set; }
+
+    public HaveInStock(int id, bool haveIn)
+    {
+        Id = id;
+        HaveIn = haveIn;
+    }
+}
+
+class FindProduct
+{
+    static void Main(string[] args)
+    {
+
+        Product[] products =
+        {
+            new Product("Желатин", 1245),
+            new Product("Лимонка", 5471),
+            new Product("Крем", 12),
+            new Product("Мука", 1247),
+        };
+
+        HaveInStock[] haveInStocks =
+        {
+            new HaveInStock(1245, false),
+            new HaveInStock(5471, true),
+            new HaveInStock(12, true),
+            new HaveInStock(1247, true),
+        };
+
+        // Для сравнения старый вариант
+        //var sort = from product in products
+        //           join haveInStock in haveInStocks
+        //           on product.Id equals haveInStock.Id
+        //           select new { product.Name, haveInStock.HaveIn };
+
+        // Использовать метод запроса Join() для составления списка
+        // наименований товаров и состояния их запасов на складе.
+        var sort = products.Join(haveInStocks,
+            k1 => k1.Id,
+            k2 => k2.Id,
+            (k1, k2) => new { k1.Name, k2.HaveIn });
+
+        foreach (var s in sort)
+        {
+            Console.WriteLine(s.Name + " " + s.HaveIn);
+        }
+} }
