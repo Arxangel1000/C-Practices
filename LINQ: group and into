@@ -1,0 +1,33 @@
+using System;
+using System.Linq;
+using System.Net.WebSockets;
+
+class GroupDemo
+{
+    static void Main(string[] args)
+    {
+        string[] websites = 
+        { 
+          "hsNameA.com", "hsNameB.net", "hsNameC.net",
+          "hsNameD.com", "hsNameE.org", "hsNameF.org",
+          "hsNameG.tv", "hsNameH.net", "hsNameI.tv", 
+        };
+
+        var webAddress = from adr in websites
+                         where adr.LastIndexOf('.') != -1
+                         group adr by adr.Substring(adr.LastIndexOf("."))
+                         into ws
+                         where ws.Count() > 2
+                         select ws;
+
+        foreach (var sites in webAddress)
+        {
+            Console.WriteLine(sites.Key);
+            foreach (var site in sites)
+            {
+                Console.WriteLine("{0}", site);
+            }
+            Console.WriteLine();
+        }
+    }
+}
