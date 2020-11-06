@@ -1,0 +1,18 @@
+
+using System;
+using System.Linq;
+
+class ExtMethods
+{
+    static void Main(string[] args)
+    {
+        int[] nums = { 1, -2, 3, 0, -4, 5 };
+        // Сформировать запрос на получение количества
+        // положительных значений в массиве nums.
+        int len = (from n in nums
+                   where n > 0
+                   select n).Count();
+        Console.WriteLine("Количество положительных значений в массиве nums: " +
+            len);
+    }
+}
