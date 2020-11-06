@@ -1,0 +1,26 @@
+
+using System;
+using System.Linq;
+
+class ExtMethods
+{
+    static void Main(string[] args)
+    {
+        int[] nums = { 1, 2, 4, 8, 6, 9, 10, 3, 6, 7 };
+        //var ltAvg = from n in nums
+        //            let x = nums.Average()
+        //            where n < x
+        //            select n;
+
+        var ltAvg = nums.Where(w => w < nums.Average());
+
+        Console.WriteLine(nums.Sum());
+        Console.WriteLine("Среднее значение равно " + nums.Average());
+        Console.Write("Значение меньше среднего ");
+        foreach (var i in ltAvg)
+        {
+            Console.Write(i + " ");
+        }
+        Console.WriteLine();
+    }
+}
