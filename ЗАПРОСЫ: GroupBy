@@ -1,0 +1,26 @@
+using System;
+using System.Linq;
+class SimpQuery
+{
+    static void Main()
+    {
+      string[] websites = {
+            "hsNameA.com", "hsNameB.net", "hsNameC.net",
+            "hsNameD.com", "hsNameE.org", "hsNameF.org",
+            "hsNameG.tv", "hsNameH.net", "hsNameItv"
+    };
+
+        var sort = websites.Where(w => w.LastIndexOf('.') != -1)
+             .GroupBy( g => g.Substring(g.LastIndexOf('.')))
+             .Where(w => w.Count() > 2);
+
+        foreach (var s in sort)
+        {
+            Console.WriteLine(s.Key);
+            foreach (var item in s)
+            {
+                Console.WriteLine(item + " ");
+            }
+        }
+    }
+}
